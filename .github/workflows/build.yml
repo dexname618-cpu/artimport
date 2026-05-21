@@ -19,20 +19,19 @@ jobs:
         id: build
         with:
           target: Android64
+          combine: true
 
-      - name: Show build output
+      - name: Package geode file
         run: |
-          echo "=== build output var ==="
-          echo "${{ steps.build.outputs.build-output }}"
-          echo "=== ls build folder ==="
-          ls -la build/ || echo "no build folder"
-          echo "=== find all files ==="
-          find /home/runner/work -name "*.geode" || echo "not found"
-          find /home/runner/work -name "*.so" || echo "no so files"
+          cd /home/runner/work/artimport/artimport
+          ls output/ || echo "no output"
+          ls build/geode/ || echo "no geode folder"
+          cp build/geode/*.geode output/ 2>/dev/null || true
+          geode package new build/libart-sprite-import.so --output output/dexname.art-sprite-import.geode --install-location /home/runner/work/artimport/artimport 2>/dev/null || true
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: dexname.art-sprite-import
-          path: ${{ steps.build.outputs.build-output }}
+          path: /home/runner/work/artimport/artimport/output/
           if-no-files-found: warn

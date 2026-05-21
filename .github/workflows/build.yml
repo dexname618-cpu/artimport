@@ -1,14 +1,21 @@
-name: Build Mod
+name: Build Geode Mod
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "**"
   workflow_dispatch:
 
 jobs:
   build:
-    uses: geode-sdk/build-geode-mod/.github/workflows/build.yml@main
-    with:
-      combine: true
-      platforms: android64
-    secrets: inherit
+    name: Android64
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          combine: true
+          target: Android64

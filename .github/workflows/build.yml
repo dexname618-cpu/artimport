@@ -21,8 +21,11 @@ jobs:
           combine: true
           target: Android64
 
+      - name: Find geode file
+        run: find . -name "*.geode" 2>/dev/null
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: dexname.art-sprite-import
-          path: "*.geode"
+          path: "**/*.geode"

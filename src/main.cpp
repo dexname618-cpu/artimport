@@ -1,5 +1,11 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/EditorUI.hpp>
+#include <Geode/modify/LevelEditorLayer.hpp>
+#include <Geode/binding/EditorUI.hpp>
+#include <Geode/binding/LevelEditorLayer.hpp>
+#include <Geode/binding/GameObject.hpp>
+#include <Geode/binding/FLAlertLayer.hpp>
+#include <filesystem>
 using namespace geode::prelude;
 
 #define IMAGE_PATH "/storage/emulated/0/GDPictures/img.png"
@@ -19,7 +25,7 @@ CCTexture2D* getCustomTexture() {
     return texture;
 }
 
-$modify(MyEditorUI, EditorUI) {
+struct MyEditorUI : geode::Modify<MyEditorUI, EditorUI> {
     bool init(LevelEditorLayer* lel) {
         if (!EditorUI::init(lel)) return false;
 

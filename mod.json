@@ -1,0 +1,17 @@
+{
+  "geode": "5.7.1",
+  "gd": {
+    "android": "2.2144"
+  },
+  "id": "dexname.art-sprite-import",
+  "name": "Import Custom Image",
+  "version": "1.0.0",
+  "developer": "Dexname",
+  "description": "Імпорт PNG картинок в GD редактор",
+  "platforms": ["android64"],
+  "android": {
+    "permissions": [
+      "android.permission.READ_EXTERNAL_STORAGE"
+    ]
+  }
+}

@@ -20,11 +20,19 @@ jobs:
         with:
           target: Android64
 
-      - name: Find all files
-        run: find /home/runner/work -name "*.geode" 2>/dev/null || echo "Not found"
+      - name: Show build output
+        run: |
+          echo "=== build output var ==="
+          echo "${{ steps.build.outputs.build-output }}"
+          echo "=== ls build folder ==="
+          ls -la build/ || echo "no build folder"
+          echo "=== find all files ==="
+          find /home/runner/work -name "*.geode" || echo "not found"
+          find /home/runner/work -name "*.so" || echo "no so files"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: dexname.art-sprite-import
-          path: /home/runner/work/**/*.geode
+          path: ${{ steps.build.outputs.build-output }}
+          if-no-files-found: warn

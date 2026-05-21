@@ -18,14 +18,13 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         id: build
         with:
-          combine: true
           target: Android64
 
-      - name: Find geode file
-        run: find . -name "*.geode" 2>/dev/null
+      - name: Find all files
+        run: find /home/runner/work -name "*.geode" 2>/dev/null || echo "Not found"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: dexname.art-sprite-import
-          path: "**/*.geode"
+          path: /home/runner/work/**/*.geode
